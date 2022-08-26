@@ -1,6 +1,4 @@
-
 // The Modules
-
 const express = require('express')
 const sharp = require('sharp')
 const fs = require('fs')
@@ -56,8 +54,6 @@ app.get('/api/images/:filename&:width&:height', (req , res) => {
         } else {
             fs.mkdirSync(thumbPath)
         }
-    
-    
     }
 })
 
