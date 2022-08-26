@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const index_1 = require("../index");
 const request = (0, supertest_1.default)(index_1.app);
 describe('Testing My EndPoint server', () => {
@@ -29,6 +31,15 @@ describe('Testing My EndPoint server', () => {
         it('expectd to be 400', () => __awaiter(void 0, void 0, void 0, function* () {
             const response = yield request.get('/api/images?filename=keyboard&width');
             expect(response.status).toBe(400);
+        }));
+        it('Expected new file exists', () => __awaiter(void 0, void 0, void 0, function* () {
+            const response = yield request.get('/api/images?filename=keyboard.jpg&width=500&height=500');
+            const res = fs_1.default.existsSync(path_1.default.resolve('./') + '/assets/thumbs/keyboard.jpg-500_500.jpg');
+            expect(res).toBeTrue();
+        }));
+        it('Expected new file exists', () => __awaiter(void 0, void 0, void 0, function* () {
+            const response = yield request.get('/api/images?filename=keyboard.jpg&width=&height=');
+            expect(response.statusCode).toBe(404);
         }));
     });
 });

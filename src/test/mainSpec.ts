@@ -26,7 +26,16 @@ describe('Testing My EndPoint server', () => {
             expect(response.status).toBe(400);
         })
 
-        
-    });
+        it('Expected new file exists', async()=> {
+            const response = await request.get('/api/images?filename=keyboard.jpg&width=500&height=500')
+            const res = fs.existsSync(path.resolve('./') + '/assets/thumbs/keyboard.jpg-500_500.jpg')            
+            expect(res).toBeTrue()
+        })
 
+        it('Expected new file exists', async()=> {
+            const response = await request.get('/api/images?filename=keyboard.jpg&width=&height=')
+            expect(response.statusCode).toBe(404)
+            
+        })
+    });
 });

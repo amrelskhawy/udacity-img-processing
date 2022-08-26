@@ -5,8 +5,8 @@ import path from 'path';
 export const resizeThePic = async (filename: string, width: any, height: any): Promise<void> => {
     console.log(filename, width, height);
 
-    
-    await sharp(`${path.resolve('./')}/assets/full/${filename}`)
+    if (filename && width && height) {
+        await sharp(`${path.resolve('./')}/assets/full/${filename}`)
         .resize({
             width: parseInt(width),
             height: parseInt(height),
@@ -14,6 +14,7 @@ export const resizeThePic = async (filename: string, width: any, height: any): P
             position: 'center'
         })
         .toFile(path.resolve('./') + `/assets/thumbs/${filename}-${width}_${height}.jpg`);
-    console.log('Donee.....');
+        console.log('Donee.....');
+    }
 
 }

@@ -17,14 +17,16 @@ const sharp_1 = __importDefault(require("sharp"));
 const path_1 = __importDefault(require("path"));
 const resizeThePic = (filename, width, height) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(filename, width, height);
-    yield (0, sharp_1.default)(`${path_1.default.resolve('./')}/assets/full/${filename}`)
-        .resize({
-        width: parseInt(width),
-        height: parseInt(height),
-        fit: 'cover',
-        position: 'center'
-    })
-        .toFile(path_1.default.resolve('./') + `/assets/thumbs/${filename}-${width}_${height}.jpg`);
-    console.log('Donee.....');
+    if (filename && width && height) {
+        yield (0, sharp_1.default)(`${path_1.default.resolve('./')}/assets/full/${filename}`)
+            .resize({
+            width: parseInt(width),
+            height: parseInt(height),
+            fit: 'cover',
+            position: 'center'
+        })
+            .toFile(path_1.default.resolve('./') + `/assets/thumbs/${filename}-${width}_${height}.jpg`);
+        console.log('Donee.....');
+    }
 });
 exports.resizeThePic = resizeThePic;
