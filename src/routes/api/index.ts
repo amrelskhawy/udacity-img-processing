@@ -1,9 +1,9 @@
-import express from 'express'
+import express from 'express';
 
-import images from '../api/images/images'
+import images from '../api/images/images';
 
-const api = express.Router()
+const api = express.Router();
 
-api.use('/images', images)
+api.use('/images', images);
 
-export default api
+export default api;
